@@ -1,0 +1,24 @@
+.music-container{
+  display: flex;
+  padding: 14rpx 20rpx;
+  align-items: center;
+}
+.music-in{
+  width: 60rpx;
+  font-size: 34rpx;
+  color: #888;
+}
+.music-right{
+  flex-grow: 1;
+  width: 0;
+}
+.music-name{
+  font-size: 34rpx;
+  color: #333;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.music-al{
+  font-size: 26rpx;
+  color: #888;
+}

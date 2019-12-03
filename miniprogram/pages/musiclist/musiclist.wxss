@@ -1,0 +1,40 @@
+.mlist{
+  height: 320rpx;
+  width: 100%;
+  filter:blur(40rpx);
+  opacity:0.4;
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  z-index:1; */
+}
+.detail-mask{
+  height: 320rpx;
+  width: 100%;
+  background-color: #333;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index:-1;
+}
+.detail-info{
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 320rpx;
+  padding: 20rpx;
+  align-items: center;
+  box-sizing: border-box;
+}
+.detail-img{
+  width: 280rpx;
+  height: 280rpx;
+  margin-right:  24rpx;
+  border-radius: 6rpx;
+}
+.detail-nm{
+  color: #fff;
+  font-size: 36rpx;
+}

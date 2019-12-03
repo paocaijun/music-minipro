@@ -1,0 +1,10 @@
+<view class='mlist' style='background:url({{playInfo.coverImgUrl}}) no-repeat top/cover'>
+</view>
+<view class='detail-mask'></view>
+<view class='detail-info'>
+  <image src='{{playInfo.coverImgUrl}}' class='detail-img'></image>
+  <view class='detail'>
+    <view class='detail-nm'>{{playInfo.name}}</view>
+  </view>
+</view>
+<x-music musiclist='{{musiclist}}' />

@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "x-music":"/components/musiclist/musiclist"
+  }
+}
