@@ -22,3 +22,6 @@
   font-size: 26rpx;
   color: #888;
 }
+.playing .music-in,.playing .music-name,.playing .music-al{
+  color: #c43d44;
+}

@@ -34,6 +34,9 @@
   margin-right:  24rpx;
   border-radius: 6rpx;
 }
+.detail{
+  flex: 1;
+}
 .detail-nm{
   color: #fff;
   font-size: 36rpx;

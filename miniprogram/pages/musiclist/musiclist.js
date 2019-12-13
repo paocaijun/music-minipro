@@ -34,8 +34,12 @@ Page({
         playInfo: { name,  coverImgUrl, description },
         musiclist: tracks
       })
+      this.setMusiclist()
       wx.hideLoading()
     })
+  },
+  setMusiclist(){
+    wx.setStorageSync('musiclist',this.data.musiclist)
   },
 
   /**

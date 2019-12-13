@@ -1,0 +1,17 @@
+<!--pages/player/player.wxml-->
+<view class='music-con' style='background:url({{alPicUrl}}) no-repeat top/cover'>
+</view>
+<view class='music-mask'></view>
+<view class='disc-info'>
+  <view class='music-disc {{isplaying?"play":""}}'>
+    <image class='music-img rotate  {{isplaying?"":"rotatePause"}}' src='{{alPicUrl}}'></image>
+  </view>
+  <view class='progress-bar'>
+  <progress-bar />
+  </view>
+  <view class='control'>
+    <i class='iconfont icon-back' bind:tap='prePlay'></i>
+    <i class='iconfont {{isplaying?"icon-zanting":"icon-play"}}' bind:tap='togglePlay'></i>
+    <i class='iconfont icon-next' bind:tap='nextPlay'></i>
+  </view>
+</view>

@@ -34,25 +34,31 @@ Page({
     this._getPlaylist()
     
   },
-  
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
+  _getPlaylist() {
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.cloud.callFunction({
+      name: "music", //对应文件名
+      data: {
+        start: this.data.playlistData.length,
+        count: MAX_LIMIT,
+        $url: "playlist"
+      }
+    }).then(res => {
+      wx.stopPullDownRefresh()
+      wx.hideLoading()
+      this.setData({
+        playlistData: this.data.playlistData.concat(res.result.data)
+      })
+    })
+  },
   onReady: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
   onHide: function () {
 
   },
@@ -86,24 +92,6 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  _getPlaylist(){
-    wx.showLoading({
-      title: '加载中',
-    })
-    wx.cloud.callFunction({
-      name: "music", //对应文件名
-      data: {
-        start: this.data.playlistData.length,
-        count: MAX_LIMIT,
-        $url:"playlist"
-      }
-    }).then(res => {
-      wx.stopPullDownRefresh()
-      wx.hideLoading()
-      this.setData({
-        playlistData: this.data.playlistData.concat(res.result.data)
-      })
-    })
   }
+ 
 })

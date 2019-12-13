@@ -1,0 +1,13 @@
+<!--components/progress-bar/progress-bar.wxml-->
+<view class='container'>
+  <text class='time'>{{showTime.current}}</text>
+  <view class='control'>
+    <movable-area class='movable-area'>
+      <movable-view class='movable-view' direction='horizontal' damping='1000' x='{{movableDis}}' bindchange='bindchange' htouchmove='htouchmove'>
+      </movable-view>
+    </movable-area>
+    <progress class='progress' stroke-width='4' activeColor='#f6f6f6' backgroundColor='#969696' percent='{{progress}}' ></progress>
+  </view>
+  <text class='time'>{{showTime.total}}</text>
+
+</view>

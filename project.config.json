@@ -54,7 +54,14 @@
 					"id": 2,
 					"name": "music列表",
 					"pathName": "pages/musiclist/musiclist",
-					"query": "playlistId = '2815708950'",
+					"query": "playlistId=3030590485",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "pages/player/player",
+					"pathName": "pages/player/player",
+					"query": "playingId=233931&index=5",
 					"scene": null
 				}
 			]

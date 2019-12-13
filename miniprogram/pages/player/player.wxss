@@ -1,0 +1,100 @@
+/* pages/player/player.wxss */
+.music-con{
+  height: 100%;
+  width: 100%;
+  filter:blur(40rpx);
+  opacity:0.4;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index:-1;
+}
+.music-mask{
+  height: 100%;
+  width: 100%;
+  background-color: #333;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index:-2;
+}
+.disc-info{
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.music-disc{
+  width: 592rpx;
+  height: 592rpx;
+  background:url('https://s3.music.126.net/mobile-new/img/disc.png?d3bdd1080a72129346aa0b4b4964b75f=') no-repeat center/contain;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%,140rpx);
+}
+/*伪类添加碟片控制杆*/ 
+.music-disc::after{
+  content:"";
+  width: 192rpx;
+  height: 274rpx;
+  position: absolute;
+  top: -150rpx;
+  left: 266rpx;
+  transform: rotate(-15deg);
+  background: url('https://s3.music.126.net/m/s/img/needle.png?702cf6d95f29e2e594f53a3caab50e12') no-repeat center/contain;
+  transition:transform 0.5s ease;
+  transform-origin: 25rpx 10rpx;
+}
+.play.music-disc::after{
+  transform: rotate(0deg)
+}  
+.music-img{
+  width: 368rpx;
+  height: 368rpx;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -184rpx;
+  margin-top: -184rpx;
+}
+.rotate{
+    animation:rotate 12s linear infinite
+}
+.rotatePause{
+  animation-play-state: paused;
+}
+@keyframes rotate{
+  from{
+    transform: rotate(0deg)
+  }
+  to{
+    transform: rotate(360deg)
+  }
+}
+.control{
+  color: #fff;
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  align-items: center;
+}
+.control .icon-back,.control .icon-next{
+  font-size: 80rpx;
+} 
+.control .icon-play,.control .icon-zanting{
+  font-size: 120rpx;
+  margin: 0 60rpx;
+}
+.progress-bar{
+  position: absolute;
+  width: 90%;
+  left: 50%;
+  bottom: 24%;
+  transform:translate(-50%);
+
+}

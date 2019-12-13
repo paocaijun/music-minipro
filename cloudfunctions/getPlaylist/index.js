@@ -10,7 +10,7 @@ const playlistCollection= db.collection('playlist')
 // 云函数入口函数
 exports.main = async (event, context) => {
   // const list = await playlistCollection.get().data
-  // 小程序一次只能取100条,需多次取
+  // 小程序一次只能取100条,需多次取所有数据存储到云存储空间
   const count= await playlistCollection.count()
   const total = count.total;
   const MAX_LIMIT=100
