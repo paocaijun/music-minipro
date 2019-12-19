@@ -14,7 +14,16 @@ App({
         traceUser: true,
       })
     }
-
-    this.globalData = {}
+    // 全局数据
+    this.globalData = {
+          playMusicId:-1
+    }
+    
+  },
+  setMusicId(id){
+      this.globalData.playMusicId = parseInt(id)
+  },
+  getMusicId() {
+    return this.globalData.playMusicId
   }
 })

@@ -3,11 +3,15 @@
 </view>
 <view class='music-mask'></view>
 <view class='disc-info'>
-  <view class='music-disc {{isplaying?"play":""}}'>
+  <view class='music-disc {{isplaying?"play":""}}'  hidden='{{!isLyricHidden}}' bind:tap='changeLyricType'>
     <image class='music-img rotate  {{isplaying?"":"rotatePause"}}' src='{{alPicUrl}}'></image>
   </view>
+  <x-lyric lyric='{{lyric}}' isLyricHidden='{{isLyricHidden}}' bind:tap='changeLyricType'  class='x-lyric'/>
   <view class='progress-bar'>
-  <progress-bar />
+  <progress-bar bind:musicEnd='nextPlay' bind:timeUpdate='timeUpdate'
+  bind:pauseMusic='pauseMusic' bind:startMusic='startMusic' isSameMusic='{{isSameMusic}}'/>
+  
+  <!-- bind绑定原生事件及自定义时间 -->
   </view>
   <view class='control'>
     <i class='iconfont icon-back' bind:tap='prePlay'></i>

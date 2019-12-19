@@ -1,0 +1,17 @@
+/* components/lyric/lyric.wxss */
+.scroll-lyric{
+  color: #ccc;
+  height: 70%;
+  width: 100%;
+  font-size: 32rpx;
+}
+.lyric-panel{
+  top: 50%;
+  position: relative;
+}
+.lyric{
+  min-height: 64rpx;
+}
+.hignlight-lyric{
+  color: #d43c33;
+}

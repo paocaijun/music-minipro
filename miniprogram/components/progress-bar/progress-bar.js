@@ -1,12 +1,12 @@
-// components/progress-bar/progress-bar.js
 // 不需要展示在页面的数据即可定义在此
 let movableAreaWidth = 0
 let movableViewWidth = 0
 // 再次获取背景音频
 const backgroundAudioManager = wx.getBackgroundAudioManager()
+let isMoving = false
 Component({
   properties: {
-
+    isSameMusic: Boolean
   },
   data: {
     showTime:{
@@ -14,28 +14,41 @@ Component({
       total:"00.00"
     },
     movableDis:0,
-    progress:20
+    progress:0
 
   },
   lifetimes:{
     ready(){
       this._getMovableDis()
       this._bindBGMEvent()
+      // 如果世同一首歌重新获取总时间
+      if (this.properties.isSameMusic) {
+        this._setTime()
+      }
+     
     }
   },
+ 
   methods: {
     bindchange(par){
-      console.log('1111', par.detail.x,this.data.movableDis)
-      if (par.detail.source){
-        let currenT = par.detail.x * backgroundAudioManager.duration / (movableAreaWidth - movableViewWidth)
-        console.log('_______', currenT, this.formatTime(currenT))
-        backgroundAudioManager.seek(currenT)
+      if (par.detail.source =='touch'){
+        this.data.progress = par.detail.x/(movableAreaWidth-movableViewWidth)*100
+        this.data.movableDis = par.detail.x
+        isMoving =true
       }
-    
     },
-    htouchmove(par){
-      console.log('par',par)
+    // 拖拉进度条时不需要设置时间，seek方法会自动定位到那个时间
+    bindtouchend(par){
+      isMoving = false
+      this.setData({
+        progress: this.data.progress,
+        movableDis: this.data.movableDis
+      })
+      let seekT = backgroundAudioManager.duration * this.data.progress/100
+      backgroundAudioManager.seek(seekT)
+
     },
+   
     _getMovableDis(){
       let query = this.createSelectorQuery()
       query.select('.movable-area').boundingClientRect()
@@ -48,7 +61,7 @@ Component({
     },
     _bindBGMEvent(){
       backgroundAudioManager.onCanplay(()=>{
-        // 获取总时长可能为undefined,用类型判断undefined更准确
+        // 获取总时长,可能为undefined,用类型判断undefined更准确
         if ( typeof backgroundAudioManager.duration !='undefined'){
           this._setTime()
         }else{
@@ -58,36 +71,40 @@ Component({
         }
       })
       backgroundAudioManager.onWaiting(() => {
-        console.log('onWaiting')
       })
+      let currentSec=-1
       backgroundAudioManager.onTimeUpdate(() => {
         let currentT = backgroundAudioManager.currentTime
-        console.log('update', currentT)
         let totalT = backgroundAudioManager.duration
-
-        // let current = this.formatEachTime(currentT)
-        // let total = this.formatEachTime(totalT)
-
-        if (currentT !== totalT){
-          let xdis = (currentT * (movableAreaWidth - movableViewWidth)) / totalT
+        let sec = currentT.toString().split('.')[0]
+        if (sec != currentSec && !isMoving){
+          // 节流，一秒钟执行一次
+          // 拖动时不执行，避免造成回弹干扰
+          let xdis =  (movableAreaWidth - movableViewWidth)* currentT/ totalT
+          currentSec = sec
           this.setData({
             movableDis: xdis,
             ['showTime.current']: this.formatTime(currentT),
-            progress: backgroundAudioManager.buffered
+            // progress: backgroundAudioManager.buffered //已缓存
+            progress: currentT / totalT*100   
           })
-          // console.log(xdis, this.data.movableDis)
+          // 触发歌词更新
+          this.triggerEvent('timeUpdate', { currentT})
           }
-        
       })
       backgroundAudioManager.onSeeking(() => {
-        console.log('onSeeking跳转')
       })
        
       backgroundAudioManager.onPlay(() => {
-        console.log('onPlay')
+        isMoving = false
+        this.triggerEvent('startMusic')
+
       })
       backgroundAudioManager.onPause(() => {
-        console.log('onPause')
+        this.triggerEvent('pauseMusic')
+      })
+      backgroundAudioManager.onEnded(()=>{
+        this.triggerEvent('musicEnd')
       })
     },
     _setTime(){

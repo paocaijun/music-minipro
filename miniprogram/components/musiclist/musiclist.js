@@ -1,4 +1,5 @@
 // components/musiclist/musiclist.js
+const app =getApp()
 Component({
   /**
    * 组件的属性列表
@@ -14,6 +15,15 @@ Component({
     playingId:-1
 
   },
+  pageLifetimes: {
+    show: function () {
+      // 获取播放音乐的id
+        this.setData({
+          playingId:app.getMusicId()
+        })
+    }
+    
+  },
 
   /**
    * 组件的方法列表
@@ -26,7 +36,7 @@ Component({
         playingId: ds.id
       })
       wx.navigateTo({
-        url: `../../pages/player/player?playingId=${this.data.playingId}&index=${ds.index}`,
+        url: `../../pages/player/player?musicId=${this.data.playingId}&index=${ds.index}`,
       })
     }
   }

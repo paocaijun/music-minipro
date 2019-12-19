@@ -98,3 +98,6 @@
   transform:translate(-50%);
 
 }
+.x-lyric{
+  height: 100%;
+}
